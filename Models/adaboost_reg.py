@@ -37,18 +37,18 @@ if 'Hospital_Id' in X_test.columns:
     X_test = X_test.drop('Hospital_Id', axis=1)
 
 # AdaBoost with hyperparameter tuning
-ada_model = AdaBoostRegressor(random_state=42)
+ada = AdaBoostRegressor(random_state=42)
 param_grid = {
     'n_estimators': [50, 100, 200],
     'learning_rate': [0.01, 0.1, 1.0],
     'loss': ['linear', 'square', 'exponential']
 }
 
-grid_search = GridSearchCV(ada_model, param_grid, cv=3, scoring='r2', n_jobs=-1)
+grid_search = GridSearchCV(ada, param_grid, cv=5, scoring='neg_root_mean_squared_error', n_jobs=-1)
 grid_search.fit(X_train, y_train)
 
-print(f"Best params: {grid_search.best_params_}")
-print(f"Best CV Score: {grid_search.best_score_:.4f}")
+print(f"Best parameters: {grid_search.best_params_}")
+print(f"Best CV Score (RMSE): {-grid_search.best_score_:.4f}")
 
 # Validate with best model
 best_ada = grid_search.best_estimator_
@@ -73,4 +73,5 @@ predictions_df = pd.DataFrame({
     'Predicted_Transport_Cost': test_pred
 })
 predictions_df.to_csv('output/adaboost_predictions.csv', index=False)
+print("Predictions saved to output/adaboost_predictions.csv")
 print("Predictions saved to output/adaboost_predictions.csv")

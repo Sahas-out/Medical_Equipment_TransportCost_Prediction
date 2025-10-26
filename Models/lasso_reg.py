@@ -40,11 +40,11 @@ if 'Hospital_Id' in X_test.columns:
 lasso = Lasso(max_iter=5000, tol=1e-4)
 param_grid = {'alpha': [0.001, 0.01, 0.1, 1.0, 10.0, 100.0]}
 
-grid_search = GridSearchCV(lasso, param_grid, cv=5, scoring='r2', n_jobs=-1)
+grid_search = GridSearchCV(lasso, param_grid, cv=5, scoring='neg_root_mean_squared_error', n_jobs=-1)
 grid_search.fit(X_train, y_train)
 
 print(f"Best alpha: {grid_search.best_params_['alpha']}")
-print(f"Best CV Score: {grid_search.best_score_:.4f}")
+print(f"Best CV Score (RMSE): {-grid_search.best_score_:.4f}")
 
 # Validate with best model
 best_lasso = grid_search.best_estimator_

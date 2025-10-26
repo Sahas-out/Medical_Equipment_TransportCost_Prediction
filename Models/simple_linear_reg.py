@@ -21,6 +21,8 @@ def load_preprocessed_data(train_path):
         X = X.drop('Hospital_Id', axis=1)
     return X, y, use_log, shift
 
+
+
 # Load data using the preprocessing function
 X_train_full, y_train_full, use_log, shift = load_preprocessed_data('data/train_processed.csv')
 test_data_orig = pd.read_csv('data/test_processed.csv')

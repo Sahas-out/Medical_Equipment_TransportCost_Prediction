@@ -55,13 +55,13 @@ param_grid = {
 
 grid_search = GridSearchCV(
     poly_pipeline, param_grid, 
-    cv=3, scoring='r2', n_jobs=-1,  # Reduced CV from 5 to 3 for speed
+    cv=3, scoring='neg_root_mean_squared_error', n_jobs=-1,  # Reduced CV from 5 to 3 for speed
     return_train_score=True
 )
 grid_search.fit(X_train, y_train)
 
 print(f"Best params: {grid_search.best_params_}")
-print(f"Best CV Score: {grid_search.best_score_:.4f}")
+print(f"Best CV Score (RMSE): {-grid_search.best_score_:.4f}")
 
 # Check for overfitting
 train_scores = grid_search.cv_results_['mean_train_score']

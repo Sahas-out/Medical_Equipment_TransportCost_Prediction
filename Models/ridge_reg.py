@@ -47,11 +47,11 @@ X_test_scaled = scaler.transform(X_test)
 ridge = Ridge()
 param_grid = {'alpha': [0.1, 1.0, 10.0, 100.0, 1000.0, 10000.0]}
 
-grid_search = GridSearchCV(ridge, param_grid, cv=5, scoring='r2', n_jobs=-1)
+grid_search = GridSearchCV(ridge, param_grid, cv=5, scoring='neg_root_mean_squared_error', n_jobs=-1)
 grid_search.fit(X_train_scaled, y_train)
 
 print(f"Best alpha: {grid_search.best_params_['alpha']}")
-print(f"Best CV Score: {grid_search.best_score_:.4f}")
+print(f"Best CV Score (RMSE): {-grid_search.best_score_:.4f}")
 
 # Validate with best model
 best_ridge = grid_search.best_estimator_

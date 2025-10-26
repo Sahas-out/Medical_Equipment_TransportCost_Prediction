@@ -45,11 +45,11 @@ param_grid = {
     'max_features': ['sqrt']
 }
 
-grid_search = GridSearchCV(rf_model, param_grid, cv=3, scoring='r2', n_jobs=-1)
+grid_search = GridSearchCV(rf_model, param_grid, cv=3, scoring='neg_root_mean_squared_error', n_jobs=-1)
 grid_search.fit(X_train, y_train)
 
 print(f"Best params: {grid_search.best_params_}")
-print(f"Best CV Score: {grid_search.best_score_:.4f}")
+print(f"Best CV Score (RMSE): {-grid_search.best_score_:.4f}")
 
 # Validate with best model
 best_rf = grid_search.best_estimator_
