@@ -2,6 +2,7 @@
 - Jayesh Pandit IMT2023111
 - Lakshya Kapoor IMT2023509
 - Sahas Sangal IMT2023556
+### GITHUB_LINK : [[https://github.com/Sahas-out/Medical_Equipment_TransportCost_Prediction]]
 # Task
 The goal of this project is to develop a machine learning model that accurately predicts the **transport cost** of medical equipment deliveries based on various logistical, supplier, and equipment-related factors. The dataset contains detailed information about hospitals, suppliers, equipment specifications, transport methods, and delivery conditions.
 
